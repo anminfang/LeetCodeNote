@@ -3,6 +3,7 @@
  * Point: Using queue to store tree, and then put left node into right node, right node into left. At the same time, continue to store
  *        child nodes into queue and then do it again.
  * Bug1: forgot to add edge check. If root is null, return null.
+ * Update: eliminated queue size and for loop
  */
 
 
@@ -16,6 +17,7 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
 class Solution {
     public TreeNode invertTree(TreeNode root) {
         if (root == null) return null;
@@ -25,18 +27,17 @@ class Solution {
         q.add(root);
         
         while (!q.isEmpty()) {
-            int size = q.size();
+            //int size = q.size();
             
-            for (int i = 0; i < size; i++) {
+            //for (int i = 0; i < size; i++) {
                 TreeNode temp = q.poll();
                 TreeNode left = temp.left;
                 temp.left = temp.right;
                 temp.right = left;
                 
                 if (temp.left != null) q.add(temp.left);
-                if (temp.right != null) q.add(temp.right);
-                
-            }
+                if (temp.right != null) q.add(temp.right);               
+            //}
         }
         return root;
     }
