@@ -1,0 +1,42 @@
+/**
+ * Point: HashMap to store Roman Number and integer, create exceptions and add negative numbers into sum before for loop to sum up, then 
+ *        can eliminate those negative numbers after sum up.
+ *        String.indexOf is using to detect whether string has exceptions or not.
+ * Bug1: Initialized character array should be lowwer case --> char
+ *
+ *
+ *
+ *
+ *
+ */
+ 
+ class Solution {
+    public int romanToInt(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        Queue<String> q = new LinkedList<>();
+        char[] arr = s.toCharArray();
+        int sum = 0;
+        
+        //store key and value into map
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+        
+        //exceptions
+        if (s.indexOf("IV") != -1) sum -= 2;
+        if (s.indexOf("IX") != -1) sum -= 2;
+        if (s.indexOf("XL") != -1) sum -= 20;
+        if (s.indexOf("XC") != -1) sum -= 20;
+        if (s.indexOf("CD") != -1) sum -= 200;
+        if (s.indexOf("CM") != -1) sum -= 200;
+        
+        for (int i = 0; i < arr.length; i++) {
+            sum += map.get(arr[i]);
+        }
+        return sum;
+    }
+}
