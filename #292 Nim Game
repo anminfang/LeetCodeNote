@@ -1,0 +1,15 @@
+/**
+Point: seeking n cannot be divided by 4
+Bug: no bug
+
+*/
+
+
+
+class Solution {
+    public boolean canWinNim(int n) {
+        
+       return (n % 4 != 0);
+        
+    }
+}
