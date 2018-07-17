@@ -1,0 +1,42 @@
+/**
+ * Point: Using string conversion and then split integer number into character, then using for loop to sum. If statement to check the sum,
+ *        if sum is smaller or equals to 9, then return the sum. IF not, do recursion until the sum is smaller or equal to 9
+ * Bug1: Length of string should have ();
+ * Bug2: Return recursion at the end of funciton. Return value before recursion when the value is accepted by rules. 
+ * Update: can use 9 as pivot to check the num
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ *
+ */
+
+class Solution {
+    public int addDigits(int num) {
+        String s = String.valueOf(num);
+        String[] arr = s.split("");
+        int len = s.length();
+        int sum = 0;
+        
+        for (int i = 0; i < len; i++) {
+            sum += Integer.parseInt(arr[i]);
+        }
+        
+        if (sum <= 9) {
+            return sum;       
+        } 
+       return addDigits(sum);
+    }
+}
+
+/**
+ * Update
+ *
+ */
+public int addDigits(int num) {
+  if (num < 10)
+     return num;
+  else if (num % 9 == 0)
+     return 9;
+  else
+     return num % 9;        
+}
+
