@@ -1,0 +1,24 @@
+/**
+ * Point: Array sorting can help to know majority element, since majority element appears more than n/2 times, that means majority element
+ *        at position n/2(odd)or (n/2)-1(even). 
+ * Bug: No
+ *
+ *
+ *
+ *
+ */
+
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        
+        Arrays.sort(nums);
+        
+        int result = 0;
+        
+        if (nums.length % 2 == 0) result = nums[(nums.length/2) - 1];
+        if (nums.length % 2 == 1) result = nums[nums.length/2];
+    
+        return result;
+    }
+}
