@@ -1,0 +1,44 @@
+/**
+ * Point: Using two pointers to move zeros
+ * Bug1: array index overflow
+ * Optimizaiton: O(N^2) is not good
+ * Update: Shift non-zero items and fill zero into reminding space of array
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ */
+
+/**
+ * First try
+ */
+class Solution {
+    public void moveZeroes(int[] nums) {
+        if (nums == null) return;
+        
+        int len = nums.length;
+        
+        for (int i = 0; i < len; i++) {
+           for (int j = i + 1; j < len; j++) {
+               if (nums[i] == 0 && nums[j] != 0) {
+                   nums[i] = nums[j];
+                   nums[j] = 0;
+               }
+           }
+        }
+    }
+}
+
+/**
+ * Updated
+ */
+public void moveZeroes(int[] nums) {
+    if (nums == null || nums.length == 0) return;        
+
+    int index = 0;
+    for (int num: nums) {
+        if (num != 0) nums[index++] = num;
+    }        
+
+    while (insertPos < nums.length) {
+        nums[index++] = 0;
+    }
+}
