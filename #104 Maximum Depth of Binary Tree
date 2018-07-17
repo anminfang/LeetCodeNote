@@ -1,4 +1,10 @@
 /**
+Point: Queue & Tree. Using queue to store tree and pop up every level to know how many levels the tree would have.
+Bug: No bug
+*/
+
+
+/**
  * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
