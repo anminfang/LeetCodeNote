@@ -1,0 +1,80 @@
+/**
+ * Point: To store tree in Queue, and check nodes one by one
+ * Bug1: Used same node to store in diffrent queue, like qq.add(temp1.left), it should be qq.add(temp2.left)
+ * Optimization: One queue can replace two queues
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ */
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        
+        Queue<TreeNode> pq = new LinkedList<>();
+        Queue<TreeNode> qq = new LinkedList<>();
+        
+        pq.add(p);
+        qq.add(q);
+        
+        while (!pq.isEmpty() && !qq.isEmpty()) {
+            TreeNode temp1 = pq.poll();
+            TreeNode temp2 = qq.poll();
+            
+            if (temp1 == null & temp2 == null) continue;
+            else if (temp1 == null || temp2 == null || temp1.val != temp2.val) return false;
+            else
+                pq.add(temp1.left);
+                qq.add(temp2.left);
+                pq.add(temp1.right);
+                qq.add(temp2.right);
+            
+//             if (temp1.val != temp2.val) return false;
+            
+//             if (temp1.left != null) pq.add(temp1.left);
+//             if (temp2.left != null) qq.add(temp2.left);
+//             if (pq.size() != qq.size()) return false;
+            
+//             if (temp1.right != null) pq.add(temp1.right);
+//             if (temp2.right != null) qq.add(temp2.right);
+//             if(pq.size() != qq.size()) return false;     
+        }
+        return true;
+    }
+}
+
+/**
+ * One Queue
+ */
+ 
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        queue.add(p);
+        queue.add(q);
+        
+        while (!queue.isEmpty()) {
+            TreeNode temp1 = queue.poll();
+            TreeNode temp2 = queue.poll();
+            
+            if (temp1 == null & temp2 == null) continue;
+            else if (temp1 == null || temp2 == null || temp1.val != temp2.val) return false;
+            else
+                queue.add(temp1.left);
+                queue.add(temp2.left);
+                queue.add(temp1.right);
+                queue.add(temp2.right);
+        }
+        return true;
+    }
+}
