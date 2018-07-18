@@ -1,0 +1,28 @@
+/*
+ * Point: To store array into HashMap, counting frequency and iterating hashmap to find which one is 1
+ * Bug1: To iterate HashMap, entry.getValue(), not entry.value, missing "get" and "()"
+ * Bug2: To store array into HashMap, missing to put "[i]" inside containsKey(), line19
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ * Optimizaiton: Sort array first, then search i and i+1, if they are the same, return true
+ */
+ 
+ class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        boolean result = false;
+        int len = nums.length;
+        int counter = 1;
+        
+        for (int i = 0; i < len; i++) {
+            if (map.containsKey(nums[i])) map.put(nums[i], counter + 1);
+            else map.put(nums[i], counter);          
+        }
+        
+        for (Map.Entry<Integer, Integer> entry: map.entrySet()) {
+            if (entry.getValue() >= 2) result = true;
+        }
+        return result;
+    }
+}
