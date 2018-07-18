@@ -1,7 +1,7 @@
 /**
  * Point: Sort array first, then follow ascending number to search missing number
  * Bug: Missed to consider edge condition, such as 0 and nums[nums.length -1]
- * Time Complexity: O(N)
+ * Time Complexity: O(NLogN) Arrays.sort
  * Space Complexity: O(1)
  *
  *
