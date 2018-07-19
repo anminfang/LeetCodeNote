@@ -1,0 +1,44 @@
+/**
+ * Point: Using Queue to store Tree and then pop up into LinkedList
+ * Bug1: Missed to use for loop to pop up all items in the Queue 
+ * Bug2: Did edge check first and then return null. It should initialize LinkedList first and then do edge check and return a blank list 
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ */
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        
+        LinkedList list = new LinkedList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        
+        if (root == null) return list;
+        
+        q.add(root);
+        
+        while (!q.isEmpty()) {
+            
+            int size = q.size();
+            List<Integer> ls = new LinkedList<>();
+            
+            for (int i = 0; i < size; i++) {
+                TreeNode temp = q.poll();
+                ls.add(temp.val);
+                if (temp.left != null) q.add(temp.left);
+                if (temp.right != null) q.add(temp.right);
+            }
+            list.addFirst(ls);
+        }
+        return list;
+    }
+}
