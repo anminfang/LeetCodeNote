@@ -1,0 +1,21 @@
+/**
+ * Point: Using while loop to test number can be divided by 2, 3, 5, if it can, then number will equal to 1 at the end of loop
+ * Bug: No
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ *
+ */
+ 
+
+class Solution {
+    public boolean isUgly(int num) {
+        if (num == 1) return true;
+        if (num == 0) return false;
+        
+        while(num % 2 == 0) num /= 2;
+        while(num % 3 == 0) num /= 3;
+        while(num % 5 == 0) num /= 5;
+        
+        return num == 1;
+    }
+}
