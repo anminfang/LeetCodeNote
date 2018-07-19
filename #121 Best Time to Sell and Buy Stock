@@ -1,0 +1,23 @@
+/**
+ * Point: Jay Kadane's Algorithms, which means to search max sum in sub-array. If sum of subarray is negative, make it to be zero.
+ * Bug: no
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        
+        if (prices == null || prices.length == 0) return 0;
+        
+        int len = prices.length;
+        int pivot = 0;
+        int mp = 0;
+        
+        for (int i = 1; i < len; i++) {
+            pivot = Math.max(0, pivot += prices[i] - prices[i-1]);
+            mp = Math.max(pivot, mp);
+        }
+        return mp;
+    }
+}
