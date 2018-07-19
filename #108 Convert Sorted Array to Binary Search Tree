@@ -1,0 +1,43 @@
+/**
+ * Point: Recursion, BST
+ * Bug1: line26, missed to minus one like nums.length-1 
+ * Bug2: When doing recursion, still put "int[]", "int" inside put()
+ * Resource: This is typical BST put method
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ */
+
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode sortedArrayToBST(int[] nums) {
+        if (nums == null || nums.length == 0) return null;
+        
+        TreeNode root = put(nums, 0, nums.length -1);
+        
+        return root;
+    }
+    
+    public TreeNode put(int[] nums, int low, int high) {
+        if (low > high) return null;
+        
+        int mid = low + (high - low)/2;
+        
+        TreeNode root = new TreeNode(nums[mid]);
+        
+        root.left = put(nums, low, (mid - 1));
+        root.right = put(nums, (mid + 1), high);
+        
+        return root;
+    }
+}
