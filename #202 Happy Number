@@ -1,0 +1,38 @@
+/**
+ * Point: Mod to calculate square of every digit and sum up, add two more reference to method argument, then mod and sum once and twice,
+ *        along with loop, once and twice will have longer distance, so we can check it is looping permanently. If once and twice are
+ *        the same sometime, then return false.
+ * Bug: No
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ */
+
+
+class Solution {
+    public boolean isHappy(int n) {
+        int x = n;
+        int y = n;
+        
+        while (x > 1) {
+            x = calSum(x);
+            if (x == 1) return true;
+            y = calSum(calSum(y));
+            if (y == 1) return true;
+            
+            if (x == y) return false;
+        }
+        return true;
+    }
+    
+    public int calSum(int n) {
+        int digit;
+        int sum = 0;
+        
+        while (n > 0) {
+            digit = n % 10;
+            sum += digit * digit;
+            n /= 10;
+        }
+        return sum;
+    }
+}
