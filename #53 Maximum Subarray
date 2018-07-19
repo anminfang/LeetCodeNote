@@ -1,0 +1,25 @@
+/**
+ * Point: Jay Kadane's algorithms, this question doesn't require that sum should larger than zero. So, it should have a pivot to tell 
+ *        where max_ending_here can start again, such as Math.max(max_ending_here += nums[i], nums[i]). If question requires sum should
+ *        larger than zero, then use Math.max(max_ending_here += nums[i], 0).
+ * Bug1:  Missed to do Math.max in line 22
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ */
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        
+        int size = nums.length;
+        
+        int max_ending_here = 0;
+        int max_so_far = Integer.MIN_VALUE;
+        
+        for (int i = 0; i< size; i++) {
+            max_ending_here = Math.max(max_ending_here += nums[i], nums[i]);
+            if (max_so_far < max_ending_here) max_so_far = max_ending_here;
+        }
+        return max_so_far;
+    }
+}
