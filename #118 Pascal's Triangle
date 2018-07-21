@@ -1,0 +1,38 @@
+/**
+ * Point: Dynamic programming. Initialize list and add a new list with value 1. Use two for loop to add values, the outside for loop is to
+ *        initialize two temporary lists, one is new list and another is pointing to previous list already stored in list. The inside for
+ *        loop is to add values from previous list into current list. Jump out the inside loop, add 1 into current list. Final step, add
+ *        current list into list, return list.
+ * Bug:   Line28, j<numRows. Actually, j should follow i, which is size of current list. The inside for loop is to store added value into
+ *        list, so size of current list is the limit.
+ * Time Complexity: O(N^2) N might be numRows
+ * Space Complexity: O(N^2) Since I used two ArrayList to do auxilary job, the size of list depends on numRows.
+ */
+
+
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        
+        List<List<Integer>> list = new ArrayList<>();
+        
+        if (numRows == 0) return list;
+        
+        list.add(new ArrayList<>());
+        list.get(0).add(1);
+        
+        for (int i = 1; i < numRows; i++) {
+            List<Integer> current = new ArrayList<>();
+            List<Integer> prev = list.get(i-1);
+            
+            current.add(1);
+            
+            for (int j = 1; j < i; j++) {
+                current.add(prev.get(j-1) + prev.get(j));
+            }
+            
+            current.add(1);
+            list.add(current);
+        }
+        return list;
+    }
+}
