@@ -1,0 +1,28 @@
+/**
+ * Point: Two pointers to do comparison and swap. The first pointer is pivot, and compares with the second pointer. If two pointers are
+ *        equal, then move second pointer to next element until they are diffrent, then increase the first pointer by 1 and swap value of
+ *        two pointers. 
+ * Bug:   Line26, return i. Actually, it should return i+1, since i is increasing from 0, so i should plus one 
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ */
+
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        
+        if (nums == null || nums.length == 0) return 0;
+        
+        int i = 0;
+        int j = 1;
+        
+        while (j < nums.length) {
+            if (nums[i] != nums[j]) {
+                i++;
+                nums[i] = nums[j];
+            }
+            j++;
+        }
+        return i+1;
+    }
+}
