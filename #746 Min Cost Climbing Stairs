@@ -1,0 +1,27 @@
+/**
+ * Point: Dynamic Programming. Bottom-up Method, every sub-problem is from step 1 and step 2. If we do comparison between step 1 and step 2,
+ *        then we will have best solution for the first sub-problem, and move forward to move pointer to next, then continue to have minimum
+ *        cost.
+ * Bug:   Forgot to compare s1 and s2 in the return statement
+ * Time Complexity: O(N)
+ * Space Complexity: O(1), since I only use s1 and s2
+ *
+ *
+ */
+
+class Solution {
+    public int minCostClimbingStairs(int[] cost) {
+        
+        int s1 = cost[0];
+        int s2 = cost[1];
+        
+        for (int i=2; i<cost.length; i++) {
+            
+            int s = cost[i] + Math.min(s1, s2);
+            s1 = s2;
+            s2 = s;
+        }
+        
+        return Math.min(s1, s2);
+    }    
+}
