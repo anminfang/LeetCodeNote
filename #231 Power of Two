@@ -1,0 +1,28 @@
+/**
+ * Point: Divided by 2, if the last number can be 1, which means it's the power of two.
+ * Bug: Line18, n > 0. It should be n > 1, since when n = 1, jump out the while loop and compare with 1.
+ *
+ *
+ *
+ */
+
+
+
+
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        
+        if (n == 0) return false;
+        if (n == 1) return true;
+        
+        while (n > 1) {
+            if (n % 2 != 0) {
+                return false;
+            }
+            else {
+                n /= 2;
+            }
+        }
+        return n == 1;
+    }
+}
