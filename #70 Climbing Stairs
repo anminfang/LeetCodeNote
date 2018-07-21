@@ -1,0 +1,64 @@
+/**
+ * Point: Dynamic Programming. There are two methods to implement this solution. Method 1 is top-down method and also is named as memo
+ *        method, which uses a memo to store past calculation and then use past result to implement recursion. Recursion will have extra
+ *        cost, so bottom-up method would be better.
+ *        Method 2 is bottom-up method. It doesn't use recursion, however, it uses two known number to calculate next number. The
+ *        advantage is saving space since bottom-up doesn't need extra array to store result and waiting for checking.
+ * Bug:   PLEASE ADD ; WHEN FINISH A LINE
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)/Memo method, O(1)/Bottom-up method
+ *
+ */
+
+//Top-down Method
+class Solution {
+    public int climbStairs(int n) {
+        
+        if (n <= 0) return 0;
+        
+        int[] memo = new int[n+1];
+        
+        for (int i=0; i<=n; i++) {
+            memo[i] = -1;
+        }
+        
+        return dp(n, memo); 
+    }
+    
+    public static int dp(int n, int[] memo) {
+        
+        if (memo[n] != -1) return memo[n];
+        
+        if (n == 1) memo[n] = 1;
+        if (n == 2) memo[n] = 2;
+        
+        if (n > 2) {
+            memo[n] = dp(n-1, memo) + dp(n-2, memo);
+        }
+        
+        return memo[n];
+    }
+}
+
+//Bottom-up Method
+class Solution {
+    public int climbStairs(int n) {
+        
+        if (n <= 0) return 0;
+        
+        int memo_i_1 = 1;
+        int memo_i_2 = 2;
+        int memo_i = 1;
+        
+        if (n == 1) return memo_i_1;
+        if (n == 2) return memo_i_2;
+        
+        for (int i=3; i<=n; i++) {
+            memo_i = memo_i_1 + memo_i_2;
+            memo_i_1 = memo_i_2;
+            memo_i_2 = memo_i;
+        }
+        
+        return memo_i;
+    }
+}
