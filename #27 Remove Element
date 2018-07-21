@@ -1,0 +1,31 @@
+/**
+ * Point: Two pointers to swap elements in array and reduce array size.
+ * Bug: Line25-27, forgot to add else statement. Under this situation, every time i will increase and don't check nums[i] == val. If
+ *      nums[j-1] = val, then nums[i] still = val.
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ *
+ *
+ */
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        
+        if (nums == null || nums.length == 0) return 0;
+        
+        int temp = 0;
+        int i = 0;
+        int j = nums.length;
+        
+        while (i < j) {
+            if (nums[i] == val) {
+                nums[i] = nums[j-1];
+                j--;
+            }
+            else {
+                i++;
+            }
+        }
+        return j;
+    }
+}
