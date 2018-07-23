@@ -1,0 +1,99 @@
+/**
+ * Point: Edition1, reverse two linked lists first, and then compare two elements until they are not equal and store that node. Second, 
+ *        used original lists to search the node and get node.next, which is the target.
+ * Bug: Line34, need to check if node.next is null or not, then move on
+ * Time Complexity: O(N)
+ * Space Complexity: O(N) NOT GOOD
+ * 
+ * 
+ */
+
+// Edition2: Used two nodes to iterate two linked lists and when they are equal, return. Or, return null.
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        
+        ListNode a = headA;
+        ListNode b = headB;
+        
+        while (a != b) {
+            a = a == null? headB:a.next;
+            b = b == null? headA:b.next;
+        }
+        return a;
+    }
+}
+
+// Edition 1: Manipulated the original structure
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        
+        if (headA == null || headB == null) return null;
+        
+        ListNode newA = reverse(headA);
+        ListNode newB = reverse(headB);
+        
+        if (newA.val != newB.val) return null;
+        
+        while (newA.val == newB.val && newA != null && newB != null) {
+            if (newA.next != null && newB.next != null) {
+                newA = newA.next;
+                newB = newB.next;
+            }
+        }
+        
+        ListNode target = newA;
+        
+        while (headA != null) {
+            if (headA.val == target.val) {
+                if (headA.next != null) {
+                    target = headA.next;
+                }
+                else {
+                    target = headA;
+                }
+            }
+        }
+        return target;
+    }
+    
+    public ListNode reverse(ListNode node) {
+        if (node.next == null) return node;
+        
+        ListNode current = node;
+        ListNode prev = null;
+        ListNode newHead = null;
+        
+        while (current != null) {
+            ListNode next = current.next;
+            current.next = null;
+            if (next == null) {
+                newHead = current;
+            }
+            prev = current;
+            current = next;
+        }
+        return newHead;
+    }
+}
