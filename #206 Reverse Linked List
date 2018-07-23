@@ -1,0 +1,42 @@
+/**
+ * Point: Used 4 pointers to reverse linked list. First step, current refers to head, new two nodes prevNode and newHead. Second step, 
+ *        put current node into loop and condition of loop is current cannot be null. Third Step, inside loop, new a temp node named 
+ *        nextNode, which is current.next. From the begining, the next node of head should change to null or add a null node to head.next.
+ *        So, there are two pointers here, one points to head(current), another points to current.next(prevNode). Fourth step, move
+ *        pointers to next node. Node prevNode will point to current and node current will point to current.next. At the same time, do a
+ *        tail check if next node of current is equal to null. If the answer is yes, then put a newNode to the current pointer and return.
+ * Bug:   prevNode should always point to current when get ready to do next loop. Line37
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ */
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        
+        if (head == null) return null;
+        
+        ListNode prevNode = null;
+        ListNode newHead = null;
+        
+        ListNode current = head;
+        
+        while (current != null) {
+            ListNode nextNode = current.next;
+            current.next = prevNode;
+            if (nextNode == null) {
+                newHead = current;
+            }
+            prevNode = current;
+            current = nextNode;
+        }
+        return newHead;
+    }
+}
