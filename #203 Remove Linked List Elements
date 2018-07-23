@@ -1,0 +1,42 @@
+/**
+ * Point: Used one new node to be the head, and then used two pointers prev and current to do deletion job. Current node is used to compare
+ *        with target value. If they are equal, prev node will skip this node and connect to next node. If not, current node will move
+ *        to next node, prev also move to next. Finally, return new head's next node.
+ * Bug: Line31, it should be current != null. NOT current.next != null, under this situation, the last node won't be checked.
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ *
+ */
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        
+        if (head == null) return null;
+        
+        ListNode newHead = new ListNode(-1);
+        ListNode current = head;
+        ListNode prev = newHead;
+        
+        newHead.next = head;
+        
+        while (current != null) {
+            if (current.val == val) {
+                prev.next = current.next;
+            }
+            else {
+                prev = prev.next;
+            }
+            current = current.next;
+        }
+        return newHead.next;
+    }
+}
