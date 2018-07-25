@@ -1,0 +1,42 @@
+/**
+ * Point: String to character; Reverse integer and compare with original number.
+ * Bug: Line33, should have a reference to integer x, then can compare with reverse at the end of solution.
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ *
+ *
+ *
+ */
+
+//Method 1: String conversion
+class Solution {
+    public boolean isPalindrome(int x) {
+        
+        String s = String.valueOf(x);
+        
+        char[] c= s.toCharArray();
+        
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] != c[c.length-1-i]) return false;
+        }
+        return true;
+    }
+    
+}
+
+//Method 2: Mod
+class Solution {
+    public boolean isPalindrome(int x) {
+        
+        if (x < 0) return false;
+        
+        int xc = x;
+        int reverse = 0;
+        
+        while (x != 0) {
+            reverse = reverse * 10 + x % 10;
+            x /= 10;
+        }
+        return xc == reverse;
+    }
+}
