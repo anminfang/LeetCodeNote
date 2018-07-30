@@ -1,0 +1,27 @@
+/**
+ * Point: HashMap, if want to check any duplicate elements in the array, Hashmap is the best way to index and elements. However, if just
+ *        want to check elements, Set would be enough.
+ * Bug1: Line23, used else {map.add(nums[i], i}. It should delete else, just directly place map.put()
+ * Bug2: Line23, map.add -> map.put
+ * Time Complexity: O(N)
+ * Space Comlexity: O(N)
+ *
+ */
+ 
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        if (nums == null || nums.length == 0) return false;
+        
+        HashMap<Integer,Integer> map = new HashMap<>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i])) {
+                if (i - map.get(nums[i]) <= k) {
+                    return true;
+                }
+            }
+            map.put(nums[i], i);
+        }
+        return false;
+    }
+}
