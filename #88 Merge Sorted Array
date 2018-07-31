@@ -1,0 +1,20 @@
+/**
+ * Point: Merge head of nums2 to the tail of nums1, then sort nums1
+ * Bug: 
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ * Optimizaiton: Two Pointers Method
+ *
+ */
+
+//Method1
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        for (int i = m; i < m+n; i++) {
+            nums1[i] = nums2[i-m];
+        }
+        Arrays.sort(nums1);
+    }
+}
+
+//Method2
