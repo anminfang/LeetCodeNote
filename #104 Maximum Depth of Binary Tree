@@ -1,6 +1,8 @@
 /**
  * Point: Queue & Tree. Using queue to store tree and pop up every level to know how many levels the tree would have.
  * Bug: No bug
+ * Time Complexity: O(N^2)
+ * Space Complexity: O(N)
  */
 
 
