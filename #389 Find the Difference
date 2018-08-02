@@ -1,0 +1,24 @@
+/**
+ * Point: XOR, Bit Manipulation
+ * Bug: Line16, char result = ''; WRONG, char result = 0; Zero in character means null
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ *
+ */
+
+class Solution {
+    public char findTheDifference(String s, String t) {
+        
+        String st = s + t;
+        
+        char[] c = st.toCharArray();
+        
+        char result = 0;
+        
+        for (int i = 0; i < c.length; i++) {
+            result ^= c[i];
+        }
+        
+        return result;
+    }
+}
