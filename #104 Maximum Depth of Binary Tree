@@ -3,6 +3,7 @@
  * Bug: No bug
  * Time Complexity: O(N^2)
  * Space Complexity: O(N)
+ * Optimizaiton: Recursion
  */
 
 
@@ -15,6 +16,7 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ /**Method 1/Tree&Queue*/
 class Solution {
     public int maxDepth(TreeNode root) {
         
@@ -38,5 +40,24 @@ class Solution {
             depth++;            
         }
         return depth;
+    }
+}
+
+/** Method 2/Recursion*/
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int maxDepth(TreeNode root) {
+        
+        if (root == null) return 0;
+        
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
     }
 }
