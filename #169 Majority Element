@@ -2,13 +2,13 @@
  * Point: Array sorting can help to know majority element, since majority element appears more than n/2 times, that means majority element
  *        at position n/2(odd)or (n/2)-1(even). 
  * Bug: No
- *
- *
- *
+ * Time Complexity: O(1)/Method 1; O(N)/HashMap
+ * Space Complexity: O(1)/Method 1; O(N)/HashMap
+ * Optimizaiton: 
  *
  */
 
-
+/**Method 1*/
 class Solution {
     public int majorityElement(int[] nums) {
         
@@ -20,5 +20,32 @@ class Solution {
         if (nums.length % 2 == 1) result = nums[nums.length/2];
     
         return result;
+    }
+}
+
+/**Method 2/HashMap*/
+class Solution {
+    public int majorityElement(int[] nums) {
+        int pivot = nums.length / 2;
+        int target = -1;
+        
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i])) {
+                map.put(nums[i], map.get(nums[i])+1);
+            }
+            else {
+                map.put(nums[i], 1);
+            }
+        }
+        
+        for (int j = 0; j < nums.length; j++) {
+            if (map.get(nums[j]) > pivot) {
+                target = nums[j];
+            }
+        }
+        
+        return target;
     }
 }
