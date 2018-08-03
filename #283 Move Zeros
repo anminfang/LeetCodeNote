@@ -1,10 +1,11 @@
 /**
  * Point: Using two pointers to move zeros
  * Bug1: array index overflow
- * Optimizaiton: O(N^2) is not good
+ * Bug2: Line49, put "first < nums.length" inside while loop condition, WRONG, only second<nums.length is enough
+ * Optimizaiton: O(N^2) is not good; Used Two Pointers to move zeros.
  * Update: Shift non-zero items and fill zero into reminding space of array
- * Time Complexity: O(N)
- * Space Complexity: O(N)
+ * Time Complexity: O(N); O(1)/Two Pointers/1 ms
+ * Space Complexity: O(N); O(1)/Two Pointers
  */
 
 /**
@@ -27,9 +28,7 @@ class Solution {
     }
 }
 
-/**
- * Updated
- */
+/**Updated1*/
 public void moveZeroes(int[] nums) {
     if (nums == null || nums.length == 0) return;        
 
@@ -40,5 +39,31 @@ public void moveZeroes(int[] nums) {
 
     while (insertPos < nums.length) {
         nums[index++] = 0;
+    }
+}
+/**Update2*/
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int first = 0, second = 1;
+        
+        while (second < nums.length) {
+            if (nums[first] == 0 && nums[second] != 0) {
+                nums[first] = nums[second];
+                nums[second] = 0;
+                first++;
+                second++;
+            }
+            // else if (nums[first] != 0 && nums[second] == 0) {
+            //     first++;
+            //     second++;
+            // }
+            else if (nums[first] == 0 && nums[second] == 0) {
+                second++;
+            }
+            else {
+                first++;
+                second++;
+            }
+        }
     }
 }
