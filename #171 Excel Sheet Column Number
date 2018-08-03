@@ -1,6 +1,6 @@
 /**
  * Point: Cycle is 26
- * Bug1: String length should have ().
+ * Bug1: String length should have (). Length of array is nums.length
  * Thought: It is wrong to use hashmap, even it has key and value. 
  *
  *
