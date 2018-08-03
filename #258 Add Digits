@@ -27,10 +27,7 @@ class Solution {
     }
 }
 
-/**
- * Update
- *
- */
+/**Update 1*/
 public int addDigits(int num) {
   if (num < 10)
      return num;
@@ -39,4 +36,14 @@ public int addDigits(int num) {
   else
      return num % 9;        
 }
-
+/**Update 2*/
+class Solution {
+    public int addDigits(int num) {
+        if (num == 0) return 0;
+        int result = 0;
+        if (num % 9 == 0) result = 9;
+        if (num % 9 != 0) result = num % 9;
+        
+        return result;
+    }
+}
