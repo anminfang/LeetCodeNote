@@ -1,0 +1,72 @@
+/**
+ * Point: First, to sum up the common node that two lists have. Second, if one list is longer than another, add node's value into new
+ *        list. If two lists are equal, but need to add another new node when the sum is larger than 9, used carry to do decision.
+ * Bug: Line67-69, forgot to add a new node when the carry is 1.
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ *
+ */
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        
+        int sum = 0;
+        int carry = 0;
+        ListNode dummyHead = new ListNode(-1);
+        ListNode current = dummyHead;
+        
+        while (l1 != null && l2 != null) {
+            sum = l1.val + l2.val + carry;
+            if (sum > 9) {
+                sum = sum - 10;
+                carry = 1;
+            }
+            else {
+                carry = 0;
+            }
+            current.next = new ListNode(sum);
+            current = current.next;
+            
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        while (l1 != null) {
+            sum = l1.val + carry;
+            if (sum > 9) {
+                sum = sum - 10;
+                carry = 1;
+            }
+            else {
+                carry = 0;
+            }
+            current.next = new ListNode(sum);
+            current = current.next;
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            sum = l2.val + carry;
+            if (sum > 9) {
+                sum = sum - 10;
+                carry = 1;
+            }
+            else {
+                carry = 0;
+            }
+            current.next = new ListNode(sum);
+            current = current.next;
+            l2 = l2.next;
+        }
+        if (carry == 1) {
+            current.next = new ListNode(1);
+        }
+        return dummyHead.next;
+    }
+}
