@@ -3,10 +3,10 @@
  * Bug: Missed to consider edge condition, such as 0 and nums[nums.length -1]
  * Time Complexity: O(NLogN) Arrays.sort
  * Space Complexity: O(1)
- *
+ * Optimizaiton: Bit Manipulation
  *
  */
-
+/** Array Sort */
 class Solution {
     public int missingNumber(int[] nums) {
         if (nums == null) return -1;
@@ -22,5 +22,18 @@ class Solution {
             }
         }
         return -1;
+    }
+}
+/** Bit Manipulation */
+class Solution {
+    public int missingNumber(int[] nums) {
+        
+       int result = nums.length;
+        
+        for (int i = 0; i < nums.length; i++) {
+            result ^= (i ^ nums[i]);
+        }
+        
+        return result;
     }
 }
