@@ -2,6 +2,7 @@
  * Point: Using Queue to store Tree and then pop up into LinkedList
  * Bug1: Missed to use for loop to pop up all items in the Queue 
  * Bug2: Did edge check first and then return null. It should initialize LinkedList first and then do edge check and return a blank list 
+ * Bug3: list.addFirst(), from bottom to up
  * Time Complexity: O(N)
  * Space Complexity: O(N)
  */
