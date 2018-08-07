@@ -3,7 +3,7 @@
  * Bug1: To iterate HashMap, entry.getValue(), not entry.value, missing "get" and "()"
  * Bug2: To store array into HashMap, missing to put "[i]" inside containsKey(), line19
  * Time Complexity: O(N)
- * Space Complexity: O(N)
+ * Space Complexity: O(N)/HashMap; O(1)/Sort
  * Optimizaiton: Sort array first, then search i and i+1, if they are the same, return true
  */
  /** HashMap */
