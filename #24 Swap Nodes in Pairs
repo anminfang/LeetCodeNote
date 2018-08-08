@@ -1,0 +1,40 @@
+/**
+ * Point: Used three pointers to swap a pair of nodes
+ * Bug1: Line28-31, remember, to change connection of nodes, first step to connect the remaining part of list, second step to change connection
+ *      of node. Such as, dummy connects to the second node, head connects to the third node, second node then connect to the first node. 
+ * Bug2: Line34, when changed the connection of current node, should pay attention to the location of current node. Current node is connecting
+ *       to the third node now, so current node just need to move forward one step. Prev node is at the dummy node now, so it needs to move
+ *       two steps.
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ */
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if (head == null) return head;
+        
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        
+        ListNode prev = dummy;
+        ListNode current = head;
+        
+        while (current != null && current.next != null) {
+            ListNode nextNode = current.next;
+            current.next = nextNode.next;
+            prev.next = nextNode;
+            nextNode.next = current;
+            
+            prev = prev.next.next;
+            current = current.next;
+        }
+        return dummy.next;
+    }
+}
