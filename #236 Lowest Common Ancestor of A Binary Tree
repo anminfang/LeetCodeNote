@@ -1,0 +1,39 @@
+/**
+ * Point: Recursion. From root to leaf, recursively to check which node equals to p or q. When p or q is located, or go the bottom without
+ *        any result. Then do comparison between left and right node, if left is null, right must equal to p or q, vice vesa. If both left
+ *        and right equal to null, then root is the answer. 
+ * Bug: Line26-28, just return right, no need to check "if (right == null)"
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ * Optimizaiton: To replace Line27-37, return left == null? right : right == null? left : root;
+ */
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) return root;
+        
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        
+        if (left == null) {
+            return right; 
+        }
+        else {
+            if (right == null) {
+                return left;
+            }
+            else {
+                return root;
+            }
+        }
+    }
+}
