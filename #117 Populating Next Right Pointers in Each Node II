@@ -1,0 +1,55 @@
+/**
+ * Point: Three Pointers, The first pointer is to iterate every level from root to leaf, and the rest of pointers is to do current node movement
+ *        and connnect nodes from left to right. When current level is done, then used outside loop while to move to next level.
+ * Bug: 
+ * Time Complexity: O(N)/2ms
+ * Space Complexity: O(1)
+ *
+ */
+/**
+ * Definition for binary tree with next pointer.
+ * public class TreeLinkNode {
+ *     int val;
+ *     TreeLinkNode left, right, next;
+ *     TreeLinkNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        if (root == null) return;
+        
+        TreeLinkNode newRoot = root;
+        
+        while (newRoot != null) {
+            TreeLinkNode current = newRoot;
+            TreeLinkNode prev = null;
+            
+            while (current != null) {
+                if (current.left != null) {
+                    if (prev != null) {
+                        prev.next = current.left;
+                    }
+                    prev = current.left;
+                }
+                if (current.right != null) {
+                    if (prev != null) {
+                        prev.next = current.right;
+                    }
+                    prev = current.right;
+                }
+                current = current.next;
+            }
+            if (newRoot.left != null) {
+                newRoot = newRoot.left;
+            }
+            else {
+                if (newRoot.right != null) {
+                    newRoot = newRoot.right;
+                }
+                else {
+                    newRoot = newRoot.next;
+                }
+            }
+        }
+    }
+}
