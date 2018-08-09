@@ -1,14 +1,10 @@
 /**
  * Point: Recursion, to check node.left == node.right and check recursively to next level.
- * Bug: No
+ * Bug: Line42-43, added root.left and root.right, failed to consider a kind of situation that only root without left and right nodes
  * Time Complexity: O(N)
- * Space Complexity: O(N)
- *
+ * Space Complexity: O(1)/Recursive, O(N)/Iteration
  *
  */
-
-
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -18,6 +14,7 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ /** Recursive */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
         
@@ -33,4 +30,31 @@ class Solution {
         return false;
     }
     
+}
+/** Iteration */
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        
+        q.add(root);
+        q.add(root);
+        
+        while (!q.isEmpty()) {
+            TreeNode temp1 = q.poll();
+            TreeNode temp2 = q.poll();
+            
+            if (temp1 == null && temp2 == null) continue;
+            if (temp1 == null || temp2 == null) return false;
+            if (temp1.val == temp2.val) {
+                q.add(temp1.left);
+                q.add(temp2.right);
+                q.add(temp1.right);
+                q.add(temp2.left);
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    }
 }
