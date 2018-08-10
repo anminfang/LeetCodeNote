@@ -1,1 +1,35 @@
-
+/**
+ * Point: Two Pointers.
+ * Bug: Line19, no need to add dummy since it doesn't need to change head
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ */
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null) return head;
+        
+        //ListNode dummy = new ListNode(-1);
+        ListNode prev = head;
+        ListNode current = head.next;
+        
+        while (current != null) {
+            if (prev.val == current.val) {
+                prev.next = current.next;
+                current = current.next;
+            }
+            else {
+                prev = current;
+                current = current.next;
+            }
+        }
+        return head;
+    }
+}
