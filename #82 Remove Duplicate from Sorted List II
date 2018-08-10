@@ -1,0 +1,42 @@
+/**
+ * Point: Two Pointers and Dummy head. If head needs to be skipped, then we need a dummy head. Double while loops to detect duplicate 
+ *        elements. The inside loop is used to skip those duplicate elements and the outside loop is used to move previous pointer to 
+ *        connnect to current pointer.
+ * Bug: Two pointers is enough, a third pointer will add more complexity
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ */
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null) return head;
+        
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode prev = dummy;
+        ListNode curr = head;
+        ListNode nextNode = head.next;
+        
+        while (curr != null) {
+            while (curr.next != null && curr.val == curr.next.val) {
+                curr = curr.next;
+            }
+            if (prev.next == curr) {
+                prev = prev.next;
+            }
+            else {
+                prev.next = curr.next;
+            }
+            curr = curr.next;
+        }
+        return dummy.next;
+    }
+}
