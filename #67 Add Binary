@@ -1,0 +1,32 @@
+/**
+ * Point: Used string.charAt() - '0' and sum them up, when the sum is larger than 2, carry will be 1, or 0. String Builder is used to append
+ *        every XOR result and then reverse.
+ * Bug: Line27, carry equals to the sum of (aDigit + bDigit + carry), Not sum = (aDigit ^ bDigit ^ carry).
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ */
+ 
+class Solution {
+    public String addBinary(String a, String b) {
+        if (a == null || a.isEmpty()) return b;
+        if (b == null || b.isEmpty()) return a;
+        
+        char[] ac = a.toCharArray();
+        char[] bc = b.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        
+        int aDigit, bDigit;
+        int carry = 0;
+        int sum;
+        int indexAc = ac.length - 1, indexBc = bc.length - 1;
+        
+        while (indexAc >= 0 || indexBc >= 0 || carry == 1) {
+            aDigit = indexAc >= 0 ? Character.getNumericValue(ac[indexAc--]) : 0;
+            bDigit = indexBc >= 0 ? Character.getNumericValue(bc[indexBc--]) : 0;
+            sum = aDigit ^ bDigit ^ carry;
+            carry = (aDigit + bDigit + carry) >= 2? 1 : 0;
+            sb.append(sum);
+        }
+        return sb.reverse().toString();
+    }
+}
