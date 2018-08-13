@@ -1,0 +1,35 @@
+/**
+ * Point: From the end of array to plus one, when the sum is larger than 9, then continue to plus one when looping to next element, if the
+ *        sum of next element is smaller than 9, then return the array, else, for loop will be looping to plus one to every element. Finally,
+ *        outside the for loop, to check the first element is zero or not, when it is zero, then create an another new array and set first
+ *        element as 1 and copy other elements from digits.
+ * Bug:
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ */
+class Solution {
+    public int[] plusOne(int[] digits) {
+        if (digits == null || digits.length == 0) return digits;
+        
+        int first = 0, end = digits.length - 1;
+        
+        while (end >= 0) {
+            if (digits[end] < 9) {
+                digits[end] += 1;
+                return digits;
+            }
+            digits[end] += 1;
+            digits[end] -= 10;
+            end--;
+        }
+        if (digits[0] == 0) {
+            int[] newArr = new int[digits.length + 1];
+            newArr[0] = 1;
+            for (int i = 1; i < newArr.length; i++) {
+                newArr[i] = digits[i - 1];
+            }
+            return newArr;
+        }
+        return digits;
+    }
+}
