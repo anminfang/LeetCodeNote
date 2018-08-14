@@ -1,0 +1,32 @@
+/**
+ * Point: Back Tracking
+ * Bug: 
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ *
+ *
+ */
+class Solution {
+    public List<String> letterCasePermutation(String S) {
+        List<String> list = new ArrayList<>();
+        
+        permutation(list, S, "", 0);
+        
+        return list;
+    }
+    
+    public void permutation(List<String> list, String s, String curr, int index) {
+        if (index == s.length()) {
+            list.add(curr);
+            return;
+        }
+        
+        if(Character.isDigit(s.charAt(index))) {
+            permutation(list, s, curr + s.charAt(index), index + 1);
+        }
+        else {
+            permutation(list, s, curr + Character.toLowerCase(s.charAt(index)), index + 1);
+            permutation(list, s, curr + Character.toUpperCase(s.charAt(index)), index + 1);
+        }
+    }
+}
