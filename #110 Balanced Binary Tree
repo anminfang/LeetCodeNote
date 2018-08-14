@@ -1,0 +1,35 @@
+/**
+ * Point: Recursion, to detect left node and right node depth, if the gap of their depth is larger than 1, then return this node's subtree
+ *        is not balanced (-1). The main method is in Line 31 that tell subtree is balanced or not. If any of subtree is not balanced, then
+ *        return -1 to tell of the whole tree is not balanced.
+ * Bug: Line27 and Line 29, should return left node and right node's value, since they are the reason for unbalanced.
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        return depth(root) != -1;
+    }
+    
+    public int depth(TreeNode root) {
+        if (root == null) return 0;
+        
+        int l = depth(root.left);
+        if (l == -1)  return -1;
+        int r = depth(root.right);
+        if (r == -1) return -1;
+        
+        if (Math.abs(l - r) > 1) return -1;
+        
+        return Math.max(l, r) + 1;
+    }
+}
