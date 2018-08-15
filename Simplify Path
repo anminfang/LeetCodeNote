@@ -1,0 +1,53 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Main {
+
+
+/*请完成下面这个函数，实现题目要求的功能
+当然，你也可以不按照下面这个模板来作答，完全按照自己的想法来 ^-^ 
+******************************开始写代码******************************/
+    static String simplifyPath(String path) {
+		Stack<Character> s = new Stack<>();
+        char[] c = path.toCharArray();
+        for (int i = 1; i < c.length; i++) {
+        	if (c[i-1].equals(".")) {
+            	continue;
+            }
+            else if (c[i-1].equals("/") && c[i].equals("/")) {
+            	s.push(c[i]);
+            }
+            else {
+            	s.push(c[i-1]);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        while (!s.isEmpth()) {
+        	sb.append(s.pop());
+        }
+        if (sb.charAt(0).equals("/")) {
+        	sb = sb.subString(1);
+        }
+        return sb.reverse();
+    }
+/******************************结束写代码******************************/
+
+
+    public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
+        String res;
+            
+        String _path;
+        try {
+            _path = in.nextLine();
+        } catch (Exception e) {
+            _path = null;
+        }
+  
+        res = simplifyPath(_path);
+        System.out.println(res);
+    }
+}
