@@ -1,0 +1,62 @@
+/**
+ * Point: Two Stacks, one is to store elements and another is to store minimum value at the same pace
+ * Bug: Line28-30, forgot to store the same value if the new element is larger than current minimum value
+ * Time Complexity: O(N), TOO SLOW
+ * Space Complexity: O(N)
+ *
+ *
+ */
+class MinStack {
+    Stack<Integer> s;
+    Stack<Integer> min;
+    int minNum;
+    
+    /** initialize your data structure here. */
+    public MinStack() {
+        s = new Stack<>();
+        min = new Stack<>();
+    }
+    
+    public void push(int x) {
+        if (s.isEmpty()) {
+            minNum = x;
+        }
+        else {
+            if (x < min.peek()) {
+                minNum = x;
+            }
+            else {
+                minNum = min.peek();
+            }
+        }
+        s.push(x);
+        min.push(minNum);
+    }
+    
+    public void pop() {
+        if (s.isEmpty() && min.isEmpty()) {
+            return;
+        }
+        else {
+            s.pop();
+            min.pop();
+        }
+    }
+    
+    public int top() {
+        return s.peek();
+    }
+    
+    public int getMin() {
+        return min.peek();
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
