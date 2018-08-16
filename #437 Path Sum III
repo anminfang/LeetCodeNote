@@ -1,0 +1,30 @@
+
+/**
+ * Point: Recursion. In pathSumGo method, to check every node to bottom, if sum - node.val is negative, then go to leaf will be zero or
+ *        sum == node.val, then count this path. In pathSum method, iterated from root node and then iterated recursively from root.left
+ *        and root.right. This way can keep sum as original sum to check from next node.  
+ * Bug: Line22, should have pathSum(root.left, sum) and pathSum(root.right, sum)
+ * Time Comlexity: If tree is balanced, O(NlogN). If tree is unbalanced, like linked list, O(N^2)
+ * Space Complexity: O(1)
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int pathSum(TreeNode root, int sum) {
+        if (root == null) return 0;
+        return pathSumGo(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+        
+    }
+    
+    public int pathSumGo(TreeNode node, int sum) {
+        if (node == null) return 0;
+        return (node.val == sum ? 1 : 0) + pathSumGo(node.left, sum - node.val) + pathSumGo(node.right, sum - node.val);
+    }
+}
