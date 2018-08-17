@@ -1,0 +1,43 @@
+/**
+ * Point: Counted the length of list, then ran to the location of target, used prev pointer to connect target's next node
+ * Bug: Line30, i < len - n(target), NOT i < len - n - 1(target's previous node)
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ *
+ *
+ */
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (head == null) return head;
+        int len = 0;
+        ListNode dummy = new ListNode(-1);
+        ListNode prev = dummy;
+        ListNode curr = head;
+        dummy.next = head;
+        while (curr != null) {
+            len++;
+            curr = curr.next;
+        }
+        curr = head;
+        for (int i = 0; i < len - n; i++) {
+            prev = prev.next;
+            curr = curr.next;
+        }
+        if (curr.next != null) {
+            prev.next = curr.next;
+        }
+        else {
+            prev.next = null;
+        }
+        
+        return dummy.next;
+    }
+}
