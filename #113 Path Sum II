@@ -1,0 +1,38 @@
+/**
+ * Point: Recursion, depth search a path that the sum equals to zero. If the sum is not zero finally, then should remove last element in 
+ *        ArrayList from bottom to up and then do the search again from up to bottom until pathSum method get the exact path and put it
+ *        into nested ArrayList.
+ * Bug: Line37, should have remove function to eliminate final element from bottom to up keep current arraylist clean.
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> curr = new ArrayList<>();
+        pathSum(root, sum, curr, list);
+        return list;
+    }
+    
+    public void pathSum(TreeNode root, int sum, List<Integer> curr, List<List<Integer>> list) {
+        if (root == null) return;
+        curr.add(root.val);
+        if (root.left == null && root.right == null && root.val == sum) {
+            list.add(new ArrayList(curr));
+        }
+        else {
+            pathSum(root.left, sum - root.val, curr, list);
+            pathSum(root.right, sum - root.val, curr, list);
+        }
+        curr.remove(curr.size() - 1);
+    }
+}
