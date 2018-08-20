@@ -35,11 +35,12 @@ class Solution {
                 if (t.right != null) q.add(t.right);
             }
             if (flag % 2 == 1) {
-                List<Integer> list = new ArrayList<>();
-                for (int j = tmp.size() - 1; j >= 0; j--) {
-                    list.add(tmp.size() - j - 1, tmp.get(j));
-                }
-                tmp = list;
+//                List<Integer> list = new ArrayList<>();
+//                for (int j = tmp.size() - 1; j >= 0; j--) {
+//                    list.add(tmp.size() - j - 1, tmp.get(j));
+//                }
+//                tmp = list;
+                Collections.reverse(tmp);//This would be faster than above codes
             }
             flag++;
             res.add(tmp);
