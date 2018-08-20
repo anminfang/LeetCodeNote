@@ -1,4 +1,13 @@
 /**
+ * Point: Queue & Tree Level Traversal, used a flag to reverse the level that needs to reverse
+ * Bug: Line37, needed a new arraylist to add reverse elements and made reference to tmp.
+ * Time Complexity: O(N^2)/ TOO SLOW
+ * Space Complexity: O(N)
+ *
+ *
+ *
+ */
+/**
  * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
@@ -22,14 +31,15 @@ class Solution {
             for (int i = 0; i < size; i++) {
                 TreeNode t = q.poll();
                 tmp.add(t.val);
-                if (flag % 2 != 1) {
-                    if (t.right != null) q.add(t.right);
-                    if (t.left != null) q.add(t.left);
+                if (t.left != null) q.add(t.left);
+                if (t.right != null) q.add(t.right);
+            }
+            if (flag % 2 == 1) {
+                List<Integer> list = new ArrayList<>();
+                for (int j = tmp.size() - 1; j >= 0; j--) {
+                    list.add(tmp.size() - j - 1, tmp.get(j));
                 }
-                else {
-                    if (t.left != null) q.add(t.left);
-                    if (t.right != null) q.add(t.right);
-                }
+                tmp = list;
             }
             flag++;
             res.add(tmp);
