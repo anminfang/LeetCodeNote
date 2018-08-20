@@ -42,3 +42,17 @@ class Solution {
         return depth;
     }
 }
+/** Recursion */
+class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        int leftDepth = minDepth(root.left);
+        int rightDepth = minDepth(root.right);
+        if (root.left != null && root.right != null) {
+            return Math.min(leftDepth, rightDepth) + 1;
+        }
+        else {
+            return Math.max(leftDepth,rightDepth) + 1;
+        }
+    }
+}
