@@ -1,0 +1,55 @@
+/**
+ * Point: Fast & Slow Pointers to locate the middle position of Linked List, then reverse the latter half of the list and set the last
+ *        element's next as null. Second step is compare the value of two lists.
+ * Bug: Line23-29, this is a typical pattern to write F&S, check fast first and then check fast again.
+ * Time Compelxity: O(N)
+ * Space Compelxity: O(1)
+ *
+ *
+ */
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) return true;
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast != null) {
+            fast = fast.next;
+            if (fast != null && fast.next != null) {
+                fast = fast.next;
+                slow = slow.next;
+            }
+        }
+        
+        ListNode reverse = reverse(slow);
+        slow.next = null;
+        
+        while (head != null) {
+            if (head.val != reverse.val) {
+                return false;
+            }
+            head = head.next;
+            reverse = reverse.next;
+        }
+        return true;
+    }
+    
+    private ListNode reverse(ListNode node) {
+        ListNode prev = null;
+        ListNode curr = node;
+        while(curr != null) {
+            ListNode tmp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = tmp;
+        }
+        return prev;
+    }
+}
