@@ -11,12 +11,12 @@ class Solution {
     public boolean wordPattern(String pattern, String str) {
         String[] value = str.split(" ");
         HashMap<Character, String> map = new HashMap<>();
-        if (pattern.length() != s.length) return false;
+        if (pattern.length() != value.length) return false;
         for (int i = 0; i < value.length; i++) {
             char[] key = pattern.charAt(i);
             if (map.containsKey(key) && !map.get(key).equals(value[i])) return false;
             if (!map.containsKey(key) && map.containsValue(value[i]))   return false;
-            map.put(pattern.charAt(i), s[i]);
+            map.put(key, value[i]);
         }
         return true;
     }
