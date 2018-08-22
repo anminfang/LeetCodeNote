@@ -1,0 +1,72 @@
+/**
+ * Point: 
+ *
+ *
+ *
+ *
+ */
+/** Regular */
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        permute(res, new ArrayList<Integer>(), nums);
+        return res;
+    }
+    
+    private void permute(List<List<Integer>> res, List<Integer> tmp, int[] nums) {
+        if (tmp.size() == nums.length) {
+            res.add(new ArrayList<>(tmp));
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (tmp.contains(nums[i])) continue;
+            tmp.add(nums[i]);
+            permute(res, tmp, nums);
+            tmp.remove(tmp.size() - 1);
+        }
+    }
+}
+/** Recursion & Swap*/
+class Solution {
+    /**
+    Solution: recursion
+    1) 从起始位置开始，将数组每个位置的值换到数组起始位置/和起始位置的值交换.
+    2）然后对剩下的 N-1 位置的数进行全排列.
+    3）将交换的数据还原.
+    
+    去重全排列：在全排列中去掉重复的规则：去重的全排列就是从第一个数字起每个数分别与它后面非重复出现的数字交换。
+用编程的话描述就是第i个数与第j个数交换时，要求[i,j)中没有与第j个数相等的数
+    **/
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        
+        if(nums == null || nums.length == 0)
+            return res;
+        
+        recursion(nums, 0, res);
+        
+        return res;
+    }
+    
+    private void recursion(int[] nums, int start/*current permutation position*/, List<List<Integer>> res) {
+        if(start == nums.length - 1) { //base case: 最后一个元素的全排列就是自己
+            List<Integer> solution = new ArrayList<Integer>();
+            for(int i : nums) 
+                solution.add(i);
+            res.add(solution);
+            return;
+        }
+        
+        //从起始位置开始 i = start, 依次将数组 start 后面位置的值和 start 位置的值交换
+        for(int i = start; i < nums.length; i++) {
+            swap(nums, start, i);          //将数组i位置的值交换到 start 位置
+            recursion(nums, start+1, res); //对剩下的 N-1 个位置的数（start 位置的下一个位置开始的数）进行全排列 - recursion 
+            swap(nums, start, i);          //将数据换回来
+        }
+    }
+    
+    private void swap(int[] nums, int i, int j) {
+        int t = nums[i];
+        nums[i] = nums[j];
+        nums[j] = t;
+    }
+}
