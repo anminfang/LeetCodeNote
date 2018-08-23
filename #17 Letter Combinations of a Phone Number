@@ -1,0 +1,30 @@
+/**
+ * Point: Backtracking
+ * Bug: Line24, forgot to add"()" after tmpStr.length
+ * Time Complexity: O(N^2)
+ * Space Complexity: O(N)
+ *
+ *
+ *
+ */
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        String[] letters = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs",  "tuv", "wxyz"};
+        List<String> res = new ArrayList<>();
+        combine(res, new StringBuilder(), digits, letters, 0);
+        return res;
+    }
+    
+    private void combine(List<String> res, StringBuilder tmp, String digits, String[] letters, int start) {
+        if (start == digits.length()) {
+            res.add(tmp.toString());
+            return;
+        }
+        String tmpStr = letters[digits.charAt(start) - '0'];
+        for (int i = 0; i < tmpStr.length(); i++) {
+            tmp.append(tmpStr.charAt(i));
+            combine(res, tmp, digits, letters, start + 1);
+            tmp.deleteCharAt(tmp.length() - 1);
+        }
+    }
+}
