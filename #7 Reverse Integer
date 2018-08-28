@@ -1,0 +1,21 @@
+/**
+ * Point: Mod
+ * Bug: Line10, res's data type should be long, NOT int, since res may have integer overflow
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ *
+ */
+class Solution {
+    public int reverse(int x) {
+        long res = 0;
+        while (x != 0) {
+            int remainder = x % 10;
+            res = res * 10 + remainder;
+            x /= 10;
+        }
+        if (res > Integer.MAX_VALUE || res < Integer.MIN_VALUE) {
+            return 0;
+        }
+        return (int)res;
+    }
+}
