@@ -1,0 +1,52 @@
+/**
+ * Point: Inorder(left, root, right), recursion
+ * Bug: Line30, put res.add(root.val) before traverse(root.left, res) as preorder(root, left, right), WRONG.
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ * Optimization: Iteration
+ *
+ *
+ *
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ /** Recursion */
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();        
+        traverse(root, res);
+        return res;
+    }
+    
+    public void traverse(TreeNode root, List<Integer> res) {
+        if (root == null) return;
+        traverse(root.left, res);
+        res.add(root.val);
+        traverse(root.right, res);
+    }
+}
+/** Iteration */
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode tmp = root;
+        while (tmp != null || !stack.isEmpty()) {
+            while (tmp != null) {
+                stack.push(tmp);
+                tmp = tmp.left;
+            }
+            tmp = stack.pop();
+            res.add(tmp.val);
+            tmp = tmp.right;
+        }
+        return res;
+    }
+}
