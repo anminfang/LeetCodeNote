@@ -20,6 +20,7 @@ class Solution {
         if (sum < 0) return;
         if (tmp.size() == nums && sum == 0) {
             res.add(new ArrayList<>(tmp));
+            return; // Runtime would be slow without this statement
         }
         for (int i = start; i < target.length; i++) {
             tmp.add(target[i]);
