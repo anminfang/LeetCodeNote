@@ -1,0 +1,32 @@
+/** TOO SLOW */
+class Solution {
+    public List<Integer> diffWaysToCompute(String input) {
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '+' || input.charAt(i) == '-' || input.charAt(i) == '*') {
+                String s1 = input.substring(0, i);
+                String s2 = input.substring(i + 1);
+                List<Integer> res1 = diffWaysToCompute(s1);
+                List<Integer> res2 = diffWaysToCompute(s2);
+                for (Integer r1: res1) {
+                    for (Integer r2: res2) {
+                        int result = 0;
+                        switch(input.charAt(i)){
+                            case '+': result = r1 + r2;
+                                break;
+                            case '-': result = r1 - r2;
+                                break;
+                            case '*': result = r1 * r2;
+                                break;
+                        }
+                        res.add(result);
+                    }
+                }
+            }
+        }
+        if (res.size() == 0) {
+            res.add(Integer.valueOf(input));
+        }
+        return res;
+    }
+}
