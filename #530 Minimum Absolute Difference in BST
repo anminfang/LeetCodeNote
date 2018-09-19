@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+ /** Method 1/TOO SLOW & ACKWARD */
+class Solution {
+    Stack<TreeNode> s = new Stack<>();
+    
+    public int getMinimumDifference(TreeNode root) {
+        // Stack<TreeNode> s = new Stack<>();
+        pushAll(root);
+        ArrayList<Integer> list = new ArrayList<>();
+        while (!s.isEmpty()) {
+            TreeNode tmp = s.pop();
+            list.add(tmp.val);
+            pushAll(tmp.right);
+        }
+        
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < list.size() - 1; i++) {
+            int abs = Math.abs(list.get(i) - list.get(i + 1));
+            min = Math.min(min, abs);
+        }
+        return min;
+    }
+    
+    public void pushAll(TreeNode root) {
+        while (root != null) {
+            s.push(root);
+            root = root.left;
+        }
+    }
+}
