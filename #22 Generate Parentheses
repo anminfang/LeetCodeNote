@@ -1,0 +1,25 @@
+/**
+ * Points: Backtrack. Simulated the sequence of adding parentheses.
+ * Bug:
+ * Time Complexity: 
+ * Space Complexity: 
+ *
+ */
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        backtracking(res, "", n, 0, 0);
+        return res;
+    }
+    
+    public void backtracking(List<String> res, String s, int n, int start, int end) {
+        if (s.length() == n * 2) {
+            res.add(s);
+            return;
+        }
+        
+        if (start < n) backtracking(res, s + "(", n, start + 1, end);
+        
+        if (end < start) backtracking(res, s + ")", n, start, end + 1);  
+    }
+}
