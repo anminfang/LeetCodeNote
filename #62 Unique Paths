@@ -1,5 +1,5 @@
 /**
- * Points: Draw a map to simulate possible paths
+ * Points: DP. Draw a map to simulate possible paths
  * Bug: 
  * Time Complexity: O(N^2)
  * Space Complexity: O(M*N)
