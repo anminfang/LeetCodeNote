@@ -1,0 +1,34 @@
+/**
+ * Points: Traversed BST and stored the right side treenode value into array list. 
+ * Bug: Line25-29, NOT traversed. It wants to add every right side tree nodes' value, not the most right side tree nodes' value.
+ * Time Complexity: O(N)
+ * Space Complexity: O(N)
+ *
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) return res;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode tmp = q.poll();
+                if (i == 0) res.add(tmp.val);
+                if (tmp.right != null) q.add(tmp.right);
+                if (tmp.left != null) q.add(tmp.left);
+            }
+        }
+        return res;
+    }
+}
