@@ -1,0 +1,33 @@
+/**
+ * Points: Two steps, first step is to swap elements between first row and first column and second step is to swap vertically first column
+ *         and last column, and then move toward middle.
+ * Bug: Line24, col should equal to 0 and col < matrix[row].length
+ * Time Complexity: O(N)
+ * Space Complexity: O(1)
+ *
+ */
+class Solution {
+    public void rotate(int[][] matrix) {
+        swap(matrix);
+    }
+    
+    public void swap(int[][] matrix) {
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = row; col < matrix[row].length; col++) {
+                int tmp = matrix[row][col];
+                matrix[row][col] = matrix[col][row];
+                matrix[col][row] = tmp;
+            }
+        }
+        
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix[row].length / 2; col++) {
+                int len = matrix[row].length;
+                int tmp = matrix[row][col];
+                matrix[row][col] = matrix[row][len - 1 - col];
+                matrix[row][len - 1 - col] = tmp;
+            }
+            
+        }
+    }
+}
