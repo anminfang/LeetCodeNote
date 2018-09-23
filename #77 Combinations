@@ -1,0 +1,27 @@
+/**
+ * Points: Backtrack.
+ * Bug: Line23, combine(res, tmp, n, k, start + 1), WRONG, SHOULD BE combine(res, tmp, n, k, i + 1)
+ * Time Complexity: O(N^2)
+ * Space Complexity: O(N)
+ *
+ */
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        combine(res, new ArrayList<>(), n, k, 1);
+        return res;
+    }
+    
+    public void combine(List<List<Integer>> res, List<Integer> tmp, int n, int k, int start) {
+        if (tmp.size() == k) {
+            res.add(new ArrayList<>(tmp));
+            return;
+        }
+        
+        for (int i = start; i <= n; i++) {
+            tmp.add(i);
+            combine(res, tmp, n, k, i + 1);
+            tmp.remove(tmp.size() - 1);
+        }
+    }
+}
