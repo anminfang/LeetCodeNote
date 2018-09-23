@@ -1,0 +1,50 @@
+/**
+ * Points: Backtrack, first step is to detect which character can be the same as word's first character; second step, if first character
+ *         has been found, then move up, down, left, right to detect whether second, third character can be the same or not, with
+ *         recursion method.
+ * Bug: Should have for loop nested for loop to iterate the whole board to search
+ * Time Complexity: O(N^2)
+ * Space Complexity: O(N)
+ */
+class Solution {
+    
+    private boolean[][] visited;
+    
+    public boolean exist(char[][] board, String word) {
+        visited = new boolean[board.length][board[0].length];
+        
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (word.charAt(0) == board[row][col] && exist(board, word, row, col, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean exist(char[][] board, String word, int row, int col, int index) {
+        if (index == word.length()) {
+            return true;
+        }
+        
+        if (row < 0 || row >= board.length ||
+            col < 0 || col >= board[row].length ||
+            board[row][col] != word.charAt(index) ||
+            visited[row][col]) {
+            return false;
+        }
+        
+        visited[row][col] = true;
+        if (exist(board, word, row + 1, col, index + 1) ||
+            exist(board, word, row - 1, col, index + 1) ||
+            exist(board, word, row, col + 1, index + 1) ||
+            exist(board, word, row, col - 1, index + 1)) {
+            return true;
+        }
+        visited[row][col] = false;
+        
+        return false;
+        
+    }
+}
