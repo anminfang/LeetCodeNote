@@ -1,0 +1,46 @@
+/**
+ * Points: Simulated filling numbers into array manually. From left --> right, when to the end of right, TOP PLUS ONE and then move to
+ *         fill the last column. From  top --> down, when to the end of down, RIGHT PLUS ONE and move to fill the last row. From right
+ *         --> left, when to the end of left, DOWN PLUS ONE and then move to fill the first column. From down --> top, when to the end 
+ *        of top, LEFT PLUS ONE.
+ * Bug: Line17, should have A INDEX to count and fill in every element.
+ * Time Complexity: O(N)
+ * Space Complexity: O(N*N)
+ *
+ *
+ */
+
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] res = new int[n][n];
+        int target = n * n;
+        int index = 1;
+        int left = 0,  right = n - 1, top = 0, down = n - 1;
+        while (index <= target) {
+            for (int i = left; i <= right; i++) {
+                res[left][i] = index;
+                index++;
+            }
+            top++;
+            
+            for (int j = top; j <= down; j++) {
+                res[j][right] = index;
+                index++;
+            }
+            right--;
+            
+            for (int k = right; k >= left; k--) {
+                res[down][k] = index;
+                index++;
+            }
+            down--;
+            
+            for (int l = down; l >= top; l--) {
+                res[l][left] = index;
+                index++;
+            }
+            left++;
+        }
+        return res;
+    }
+}
