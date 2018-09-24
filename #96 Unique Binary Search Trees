@@ -1,0 +1,21 @@
+/**
+ *Points: Dynamic Programming. When n = 0 or n = 1, it has only one way to arrange tree nodes. And, if n > 1, then its tree nodes arrangement
+ *        would be the product of former numbers. 
+ * Bug: Line14, j < i, WRONG, SHOULD BE j <= i
+ * Time Complexity: O(N^2)
+ * Space Complexity: O(N)
+ *
+ */
+class Solution {
+    public int numTrees(int n) {
+        int[] res = new int[n + 1];
+        res[0] = 1;
+        res[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                res[i] += res[j - 1] * res[i - j]; // left tree * right tree, such as n = 7, root = 3, then res[3-1] * res[7-3]
+            }
+        }
+        return res[n];
+    }
+}
