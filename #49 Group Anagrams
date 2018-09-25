@@ -1,0 +1,29 @@
+/**
+ * Points: HashMap to store sorted string and original string in a list.
+ * Bug: Line22-24, new a list and add string element into list, then add the list into map.
+ * Time Complexity: O(NlgN)
+ * Space Complexity: O(N)
+ *
+ *
+ *
+ */
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null || strs.length == 0) return new ArrayList<List<String>>();
+        Map<String, List<String>> map = new HashMap<>();
+        for (String s: strs) {
+            char[] c = s.toCharArray();
+            Arrays.sort(c);
+            String key = String.valueOf(c);
+            if (map.containsKey(key)) {
+                map.get(key).add(s);
+            }
+            else{
+                List<String> list = new ArrayList<>();
+                list.add(s);
+                map.put(key, list);
+            }
+        }
+        return new ArrayList<List<String>>(map.values());
+    }
+}
