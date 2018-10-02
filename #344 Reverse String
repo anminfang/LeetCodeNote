@@ -1,0 +1,22 @@
+/* Method 1 */
+class Solution {
+    public String reverseString(String s) {
+        StringBuilder sb = new StringBuilder(s);
+        sb.reverse();
+        return sb.toString();
+    }
+}
+
+/** Method 2 / Two Pointers / FASTEST */
+class Solution {
+    public String reverseString(String s) {
+        int start = 0, end = s.length() - 1;
+        char[] c = s.toCharArray();
+        while (start < end) {
+            char tmp = c[start];
+            c[start++] = c[end];
+            c[end--] = tmp;
+        }
+        return new String(c);
+    }
+}
